@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         camera = GetComponent<Camera>();
-        SwitchHolders();
     }
 
     // Update is called once per frame
@@ -33,26 +32,26 @@ public class CameraController : MonoBehaviour
     {
         if (overhead)
         {   
+            // Tells control manager to switch to top down controls. 
+            cm.SetTileAsActive();
+
             storedRotation = transform.localRotation;
             transform.SetParent(overheadCameraHolder,false);
             camera.orthographic = true;
             transform.localRotation = Quaternion.identity;
             camera.cullingMask = camera.cullingMask |= (1 << 7);
             camera.cullingMask = camera.cullingMask &= ~(1 << 6);
-
-            // Tells control manager to switch to top down controls. 
-            cm.SetTileAsActive();
         }
         else
         {
+            // Tells control manager to switch to first person controls. 
+            cm.SetFPAsActive();
+
             transform.SetParent(fPCameraHolder,false);
             camera.orthographic = false;
             transform.localRotation = storedRotation;
             camera.cullingMask = camera.cullingMask |= (1 << 6);
             camera.cullingMask = camera.cullingMask &= ~(1 << 7);
-
-            // Tells control manager to switch to first person controls. 
-            cm.SetFPAsActive();
         }
     }
 }

@@ -33,15 +33,15 @@ public class CameraController : MonoBehaviour
     {
         if (overhead)
         {   
+            // Tells control manager to switch to top down controls. 
+            cm.SetTileAsActive();
+
             storedRotation = transform.localRotation;
             transform.SetParent(overheadCameraHolder,false);
             camera.orthographic = true;
             transform.localRotation = Quaternion.identity;
             camera.cullingMask = camera.cullingMask |= (1 << 7);
             camera.cullingMask = camera.cullingMask &= ~(1 << 6);
-
-            // Tells control manager to switch to top down controls. 
-            cm.SetTileAsActive();
         }
         else
         {

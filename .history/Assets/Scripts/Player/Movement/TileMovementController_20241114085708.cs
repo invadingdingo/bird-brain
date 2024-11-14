@@ -101,7 +101,7 @@ public class TileMovementController : MonoBehaviour {
             // Update the position when transitioning from 3D.
             newPosition = new Vector3(
                 Mathf.Floor(newPosition.x) + 0.5f,
-                0,
+                30,
                 Mathf.Floor(newPosition.z) + 0.5f
             );
             transform.position = newPosition;

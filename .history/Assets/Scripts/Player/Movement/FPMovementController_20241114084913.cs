@@ -97,10 +97,9 @@ public class FPMovementController : MonoBehaviour {
         isActiveController = newState;
 
         if (newState) {
+            Debug.Log("updating FP pos");
             // Update position when transitioning from 2D.
-            //transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
-            transform.position = new Vector3(0,0,0);
-            Debug.Log(transform.position);
+            transform.position = newPosition;
         }
     }
 }

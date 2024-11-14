@@ -62,13 +62,11 @@ public class TileMovementController : MonoBehaviour {
     private void HandleMovement() {
     	downCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, -1), distanceToMove);
         upCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, 1), distanceToMove);
-        leftCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(-1, 0, 0), distanceToMove);
-        rightCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(1, 0, 0), distanceToMove);
+        //leftCast = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.z - distanceToMove), -Vector2.right, distanceToMove);
+        //rightCast = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.z - distanceToMove), Vector2.right, distanceToMove);
 
         Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, -1) * distanceToMove, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, 1) * distanceToMove, Color.green);
-        Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(1, 0, 0) * distanceToMove, Color.blue);
-        Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(-1, 0, 0) * distanceToMove, Color.yellow);
+        Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, 1) * distanceToMove, Color.red);
 
 
         Vector3 directionInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -94,19 +92,8 @@ public class TileMovementController : MonoBehaviour {
         }
     }
 
-    public void SetActiveController(bool newState, Vector3 newPosition) {
+    public void SetActiveController(bool newState) {
         isActiveController = newState;
-
-        if (newState) {
-            // Update the position when transitioning from 3D.
-            newPosition = new Vector3(
-                Mathf.Floor(newPosition.x) + 0.5f,
-                0,
-                Mathf.Floor(newPosition.z) + 0.5f
-            );
-            transform.position = newPosition;
-            endPosition = newPosition;
-        }
     }
 
 }

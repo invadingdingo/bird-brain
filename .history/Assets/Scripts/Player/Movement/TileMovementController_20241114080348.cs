@@ -102,10 +102,9 @@ public class TileMovementController : MonoBehaviour {
             newPosition = new Vector3(
                 Mathf.Floor(newPosition.x) + 0.5f,
                 0,
-                Mathf.Floor(newPosition.z) + 0.5f
+                Mathf.Floor(newPosition.z) + 0.5f,
             );
             transform.position = newPosition;
-            endPosition = newPosition;
         }
     }
 

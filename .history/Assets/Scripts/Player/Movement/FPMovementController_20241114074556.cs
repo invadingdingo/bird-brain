@@ -93,14 +93,10 @@ public class FPMovementController : MonoBehaviour {
         }
     }
 
-    public void SetActiveController(bool newState, Vector3 newPosition) {
+    public void SetActiveController(bool newState, Vector3 newPosition = new Vector3(0, 0, 0)) {
         isActiveController = newState;
 
-        if (newState) {
-            // Update position when transitioning from 2D.
-            //transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
-            transform.position = new Vector3(0,0,0);
-            Debug.Log(transform.position);
-        }
+        // Update position when transitioning from 2D.
+        transform.position = newPosition;
     }
 }
