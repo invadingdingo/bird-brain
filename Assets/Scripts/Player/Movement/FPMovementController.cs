@@ -25,9 +25,12 @@ public class FPMovementController : MonoBehaviour {
 
     private CameraController camController;
 
+    void Awake() {
+        characterController = GetComponent<CharacterController>();
+    }
+
     // Start is called before the first frame update
     void Start() {
-        characterController = GetComponent<CharacterController>();
         camController = playerCamera.GetComponent<CameraController>();
     
         // Lock cursor
@@ -49,7 +52,7 @@ public class FPMovementController : MonoBehaviour {
 
             float movementDirectionY = moveDirection.y;
             moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-        
+
             if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
             {
                 moveDirection.y = jumpSpeed;
@@ -74,10 +77,8 @@ public class FPMovementController : MonoBehaviour {
             }
             else
             {
-                characterController.Move(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"))
-                                        * (Time.deltaTime * walkingSpeed));
+                characterController.Move(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * (Time.deltaTime * walkingSpeed));
             }
-            
         
             // Player and Camera rotation
             if (canMove)
@@ -94,13 +95,15 @@ public class FPMovementController : MonoBehaviour {
     }
 
     public void SetActiveController(bool newState, Vector3 newPosition) {
-        isActiveController = newState;
-
         if (newState) {
             // Update position when transitioning from 2D.
-            //transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
-            transform.position = new Vector3(0,0,0);
+            characterController.enabled = false;
+            transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
+            characterController.enabled = true;
+            //transform.position = new Vector3(0,0,0);
             Debug.Log(transform.position);
         }
+
+        isActiveController = newState;
     }
 }

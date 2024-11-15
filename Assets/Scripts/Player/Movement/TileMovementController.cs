@@ -11,6 +11,8 @@ public class TileMovementController : MonoBehaviour {
     // Will be true when current perspective is active. 
     private bool isActiveController = true;
 
+    public LayerMask collisions;
+
     // Directional rays to check each cardinal direction from player.
     private bool downCast;
     private bool upCast;
@@ -60,10 +62,10 @@ public class TileMovementController : MonoBehaviour {
     }
 
     private void HandleMovement() {
-    	downCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, -1), distanceToMove);
-        upCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, 1), distanceToMove);
-        leftCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(-1, 0, 0), distanceToMove);
-        rightCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(1, 0, 0), distanceToMove);
+    	downCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, -1), distanceToMove, collisions);
+        upCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, 1), distanceToMove, collisions);
+        leftCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(-1, 0, 0), distanceToMove, collisions);
+        rightCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(1, 0, 0), distanceToMove, collisions);
 
         Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, -1) * distanceToMove, Color.red);
         Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, 1) * distanceToMove, Color.green);
