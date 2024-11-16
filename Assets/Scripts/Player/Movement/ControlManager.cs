@@ -13,6 +13,6 @@ public class ControlManager : MonoBehaviour {
 
     public void SetFPAsActive() {
         playerTileMovement.GetComponent<TileMovementController>().SetActiveController(false, playerTileMovement.transform.position);
-        playerFPMovement.GetComponent<FPMovementController>().SetActiveController(true, playerTileMovement.transform.position);
+        playerFPMovement.GetComponent<FPMovementController>().SetActiveController(true, playerTileMovement.transform.position, playerTileMovement.GetComponent<TileMovementController>().direction);
     }
 }
