@@ -8,10 +8,19 @@ public class TileMovementController : MonoBehaviour {
     [SerializeField] private float distanceToMove;
     [SerializeField] private float moveSpeed;
 
+    // Sprite
+    [SerializeField] private Sprite[] upWalk;
+    [SerializeField] private Sprite[] downWalk;
+    [SerializeField] private Sprite[] sideWalk;
+    private SpriteRenderer sr;
+    private float animationTimer = 0f; // Timer for animation.
+    private float frameDuration = 0.1f; // Duration for each frame.
+    private int currentFrame = 0; // Current frame index.
+
     // Will be true when current perspective is active. 
     private bool isActiveController = true;
 
-    public LayerMask collisions;
+    [SerializeField] public LayerMask collisions;
 
     // Directional rays to check each cardinal direction from player.
     private bool downCast;
@@ -19,10 +28,11 @@ public class TileMovementController : MonoBehaviour {
     private bool rightCast;
     private bool leftCast;
 
+    Vector3 directionInput = Vector3.zero;
     private bool moveToPoint = false;
     private Vector3 endPosition;
     private bool moving;
-    private int direction;
+    public string direction = "up";
     private Vector3 prevPos;
 
     private Vector3 facing;
@@ -31,6 +41,7 @@ public class TileMovementController : MonoBehaviour {
     private GameObject interactable;
 
     void Start() {
+        sr = GetComponent<SpriteRenderer>();
         endPosition = transform.position;
         moving = false;
         canMove = true;
@@ -41,6 +52,7 @@ public class TileMovementController : MonoBehaviour {
     void Update() {
     	if (canMove && isActiveController) {
     		HandleMovement();
+            AnimationControl();
     	}
     }
 
@@ -73,26 +85,69 @@ public class TileMovementController : MonoBehaviour {
         Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(-1, 0, 0) * distanceToMove, Color.yellow);
 
 
-        Vector3 directionInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        directionInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         if (directionInput != Vector3.zero && !moving) {
             if (directionInput.z == -1) {
                 if (!downCast) { endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - distanceToMove); }
-                direction = 0;
+                direction = "down";
                 facing = new Vector3(0, 0, -1);
             } else if (directionInput.x == -1) {
                 if (!leftCast) { endPosition = new Vector3(transform.position.x - distanceToMove, transform.position.y, transform.position.z); }
-                direction = 1;
+                direction = "left";
                 facing = new Vector3(-1, 0, 0);
             } else if (directionInput.x == 1) {
                 if (!rightCast) { endPosition = new Vector3(transform.position.x + distanceToMove, transform.position.y, transform.position.z); }
-                direction = 2;
+                direction = "right";
                 facing = new Vector3(1, 0, 0);
             } else if (directionInput.z == 1) {
                 if (!upCast) { endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + distanceToMove); }
-                direction = 3;
+                direction = "up";
                 facing = new Vector3(0, 0, 1);
             }
            	moveToPoint = true;
+        }
+    }
+
+    public void AnimationControl() {
+        Sprite[] currentSet = downWalk;
+
+        // Determine the current animation set and flip the sprite if needed.
+        switch (direction) {
+            case "down":
+                currentSet = downWalk;
+                break;
+            case "left":
+                transform.localScale = new Vector3(1, 1, 1);
+                currentSet = sideWalk;
+                break;
+            case "right":
+                transform.localScale = new Vector3(-1, 1, 1);
+                currentSet = sideWalk;
+                break;
+            case "up":
+                currentSet = upWalk;
+                break;
+        }
+
+        if (directionInput != Vector3.zero || moving) {
+            // Update the timer and advance the frame if needed.
+            animationTimer += Time.deltaTime;
+
+            if (animationTimer >= frameDuration) {
+                animationTimer = 0f;
+                // Cycle through frames: 0 -> 1 -> 0 -> 2 -> repeat.
+                currentFrame = (currentFrame + 1) % 4;
+            }
+
+
+
+            // Set the sprite based on the current frame.
+            sr.sprite = currentSet[currentFrame];
+        } else {
+            // When the player is stationary, always show the first frame.
+            sr.sprite = currentSet[0];
+            animationTimer = 0f; // Reset the animation timer.
+            currentFrame = 0; // Reset the frame to the first one.
         }
     }
 

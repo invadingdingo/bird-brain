@@ -94,14 +94,32 @@ public class FPMovementController : MonoBehaviour {
         }
     }
 
-    public void SetActiveController(bool newState, Vector3 newPosition) {
+    public void SetActiveController(bool newState, Vector3 newPosition, string direction = "") {
+
         if (newState) {
             // Update position when transitioning from 2D.
             characterController.enabled = false;
             transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
+
+            switch (direction) {
+                case "up":
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    break;
+                case "left":
+                    transform.rotation = Quaternion.Euler(0, 270, 0);
+                    break;
+                case "right":
+                    transform.rotation = Quaternion.Euler(0, 90, 0);
+                    break;
+                case "down":
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    break;
+                default:
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    break;
+            }
+
             characterController.enabled = true;
-            //transform.position = new Vector3(0,0,0);
-            Debug.Log(transform.position);
         }
 
         isActiveController = newState;
