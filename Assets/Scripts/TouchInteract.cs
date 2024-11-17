@@ -8,6 +8,8 @@ public class TouchInteract : MonoBehaviour
 
     public List<Changeable> controls;
 
+    public TouchInteract otherPerspective;
+
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
@@ -17,9 +19,24 @@ public class TouchInteract : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            myAnimator.SetTrigger("Trigger");
+            if (otherPerspective != null)
+                otherPerspective.OtherPerspectiveTrigger();
+            if (myAnimator != null)
+                myAnimator.SetTrigger("Trigger");
             foreach(Changeable control in controls)
                 control.Change();
         }
+    }
+
+    public void OtherPerspectiveTrigger()
+    {
+        if (myAnimator != null)
+            myAnimator.SetTrigger("Trigger");
+        if (controls.Count>0)
+        {
+            foreach(Changeable control in controls)
+                control.Change();
+        }
+        
     }
 }
