@@ -14,10 +14,26 @@ public class CameraController : MonoBehaviour
     private Camera camera;
     private Quaternion storedRotation;
     public PostProcessLayer outlineShader;
+    public PostProcessVolume outlineVolume;
 
     void Awake()
     {
         camera = GetComponent<Camera>();
+        
+    }
+
+    void Start()
+    {
+        
+        overhead = !overhead;
+        SwitchHolders();
+        StartCoroutine("DumbProcessing");
+    }
+
+    private IEnumerator DumbProcessing()
+    {
+        yield return new WaitForFixedUpdate();
+        overhead = !overhead;
         SwitchHolders();
     }
 
@@ -35,7 +51,7 @@ public class CameraController : MonoBehaviour
     {
         if (overhead)
         {   
-            storedRotation = transform.localRotation;
+            //storedRotation = transform.localRotation;
             transform.SetParent(overheadCameraHolder,false);
             camera.orthographic = true;
             transform.localRotation = Quaternion.identity;
@@ -44,6 +60,7 @@ public class CameraController : MonoBehaviour
             
             //Turn off outline shader
             outlineShader.enabled = false;
+            outlineVolume.enabled = false;
 
             // Tells control manager to switch to top down controls. 
             cm.SetTileAsActive();
@@ -59,6 +76,7 @@ public class CameraController : MonoBehaviour
 
             //Turn on outline shader
             outlineShader.enabled = true;
+            outlineVolume.enabled = true;
             
             // Tells control manager to switch to first person controls. 
             cm.SetFPAsActive();
