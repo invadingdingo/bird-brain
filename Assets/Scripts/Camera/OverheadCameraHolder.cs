@@ -8,6 +8,6 @@ public class OverheadCameraHolder : MonoBehaviour
     
     void FixedUpdate()
     {
-        transform.position = new Vector3(target.transform.position.x, 20, target.transform.position.z);
+        transform.position = new Vector3(target.transform.position.x, 60, target.transform.position.z);
     }
 }
