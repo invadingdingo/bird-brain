@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -12,6 +13,7 @@ public class CameraController : MonoBehaviour
     public bool overhead;
     private Camera camera;
     private Quaternion storedRotation;
+    public PostProcessLayer outlineShader;
 
     void Awake()
     {
@@ -39,9 +41,13 @@ public class CameraController : MonoBehaviour
             transform.localRotation = Quaternion.identity;
             camera.cullingMask = camera.cullingMask |= (1 << 7);
             camera.cullingMask = camera.cullingMask &= ~(1 << 6);
+            
+            //Turn off outline shader
+            outlineShader.enabled = false;
 
             // Tells control manager to switch to top down controls. 
             cm.SetTileAsActive();
+            
         }
         else
         {
@@ -51,6 +57,9 @@ public class CameraController : MonoBehaviour
             camera.cullingMask = camera.cullingMask |= (1 << 6);
             camera.cullingMask = camera.cullingMask &= ~(1 << 7);
 
+            //Turn on outline shader
+            outlineShader.enabled = true;
+            
             // Tells control manager to switch to first person controls. 
             cm.SetFPAsActive();
         }
