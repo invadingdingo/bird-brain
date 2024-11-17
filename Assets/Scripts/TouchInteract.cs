@@ -6,6 +6,8 @@ public class TouchInteract : MonoBehaviour
 {
     private Animator myAnimator;
 
+    public List<Changeable> controls;
+
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
@@ -15,8 +17,9 @@ public class TouchInteract : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Change Now!");
             myAnimator.SetTrigger("Trigger");
+            foreach(Changeable control in controls)
+                control.Change();
         }
     }
 }
