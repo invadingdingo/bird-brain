@@ -63,6 +63,11 @@ public class TileMovementController : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, endPosition, moveSpeed * Time.deltaTime);
 
                 if (transform.position != endPosition) {
+                    
+                    // Play footstep SFX.
+                    if (!moving)
+                        AudioManager.instance.PlayFootStep();
+
                     moving = true;
                 } else {
                     moving = false;
