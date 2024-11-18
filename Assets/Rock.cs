@@ -4,17 +4,21 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour {
 
-    public GameObject thirdPersonRock;
-    private Vector3 startPosition;
+    public GameObject FPRock;
 
-    [SerializeField] private LayerMask collision;
+    private Vector3 TDStartPosition;
+    private Vector3 FPStartPosition;
+
+    [SerializeField] private LayerMask TDCollision;
+    [SerializeField] private LayerMask FPCollision;
 
     [SerializeField] private float pushTime = 0.5f;
     private bool beingPushed = false;
     private Vector3 endPosition;
 
     void Start() {
-        startPosition = transform.position;
+        TDStartPosition = transform.position;
+        FPStartPosition = FPRock.transform.position;
     }
 
     public void Push(string direction) {
@@ -66,16 +70,33 @@ public class Rock : MonoBehaviour {
 
         // Ensure the position is exactly the target at the end
         transform.position = targetPosition;
+        MoveFPRock(targetPosition);
         beingPushed = false;
     }
 
+    void MoveFPRock(Vector3 newPosition) {
+        // Raycast to find the height of the ground being transitioned to.
+        // Shoot ray down from 30 units up to check for intersection.
+        Ray ray = new Ray(new Vector3(newPosition.x, 30f, newPosition.z), Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 40f, FPCollision)) {
+            // If intersection found, set newPosition.y to the point of intersection plus 1 to account for player height..
+            newPosition.y = hit.point.y;
+        } else {
+            Debug.Log("Ground not found!");
+        }
+
+        FPRock.transform.position = newPosition;
+
+    }
+
     public void Reset() {
-        transform.position = startPosition;
+        transform.position = TDStartPosition;
+        FPRock.transform.position = FPStartPosition;
     }
 
     private bool IsPositionOccupied(Vector3 position) {
         Vector3 checkSize = new Vector3(0.5f, 0f, 0.5f);
-        bool isOccupied = Physics.CheckBox(position, checkSize / 2, Quaternion.identity, collision);
+        bool isOccupied = Physics.CheckBox(position, checkSize / 2, Quaternion.identity, TDCollision);
         return isOccupied;
     }
 }
