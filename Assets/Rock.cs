@@ -61,6 +61,9 @@ public class Rock : MonoBehaviour {
         float elapsedTime = 0f;
         beingPushed = true;
 
+        // Play Rock Push SFX.
+        AudioManager.instance.PlayRockPush();
+
         while (elapsedTime < pushTime) {
             // Interpolate position based on elapsed time
             transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / pushTime);

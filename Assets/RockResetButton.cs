@@ -9,7 +9,10 @@ public class RockResetButton : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
 
         if (other.CompareTag("Player")) {
-            Debug.Log("Entered");
+            
+            // Play button SFX.
+            AudioManager.instance.PlayButton();
+
             foreach (GameObject rock in rocksToReset) {
                 rock.GetComponent<Rock>().Reset();
             }

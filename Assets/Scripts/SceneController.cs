@@ -30,6 +30,12 @@ public class SceneController : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
+        if (sceneName == "Menu") {
+            AudioManager.instance.StopMusic();
+        } else {
+            AudioManager.instance.PlayMusic();
+        }
+
         SceneManager.LoadScene(sceneName);
     }
 
