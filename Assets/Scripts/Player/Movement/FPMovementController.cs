@@ -24,6 +24,7 @@ public class FPMovementController : MonoBehaviour {
     public bool canMove = true;
 
     private CameraController camController;
+    public LayerMask groundLayer;
 
     void Awake() {
         characterController = GetComponent<CharacterController>();
@@ -95,12 +96,28 @@ public class FPMovementController : MonoBehaviour {
     }
 
     public void SetActiveController(bool newState, Vector3 newPosition, string direction = "") {
-
         if (newState) {
-            // Update position when transitioning from 2D.
+            
+            //Disable character controller to modify position. 
             characterController.enabled = false;
-            transform.position = new Vector3(newPosition.x, transform.position.y, newPosition.z);
+            
+            // Disable collider for raycast otherwise ground will be detected at the top of player capsule..
+            GetComponent<CapsuleCollider>().enabled = false;
 
+            // Raycast to find the height of the ground being transitioned to.
+            // Shoot ray down from 100 units up to check for intersection.
+            Ray ray = new Ray(new Vector3(newPosition.x, 30f, newPosition.z), Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, 40f, groundLayer)) {
+                // If intersection found, set newPosition.y to the point of intersection plus 1 to account for player height..
+                newPosition.y = hit.point.y + 1;
+            } else {
+                Debug.Log("Ground not found!");
+            }
+
+            // Reenable collider after ground detection.
+            GetComponent<CapsuleCollider>().enabled = true;
+
+            // Depending on facing direction of 2D sprite, set FP controller to match. 
             switch (direction) {
                 case "up":
                     transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -119,6 +136,10 @@ public class FPMovementController : MonoBehaviour {
                     break;
             }
 
+            // Set new position.
+            transform.position = new Vector3(newPosition.x, newPosition.y, newPosition.z);
+
+            // Reenable character controller. 
             characterController.enabled = true;
         }
 

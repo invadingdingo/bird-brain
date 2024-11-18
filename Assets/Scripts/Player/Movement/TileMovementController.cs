@@ -58,7 +58,7 @@ public class TileMovementController : MonoBehaviour {
 
     void FixedUpdate() {
             if (moveToPoint) {
-                endPosition = new Vector3(endPosition.x, 0, endPosition.z);
+                endPosition = new Vector3(endPosition.x, transform.position.y, endPosition.z);
                 transform.position = Vector3.MoveTowards(transform.position, endPosition, moveSpeed * Time.deltaTime);
 
                 if (transform.position != endPosition) {
@@ -74,37 +74,55 @@ public class TileMovementController : MonoBehaviour {
     }
 
     private void HandleMovement() {
-    	downCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, -1), distanceToMove, collisions);
-        upCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, 1), distanceToMove, collisions);
-        leftCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(-1, 0, 0), distanceToMove, collisions);
-        rightCast = Physics.Raycast(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(1, 0, 0), distanceToMove, collisions);
+    	downCast = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(0, 0, -1), distanceToMove, collisions);
+        upCast = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(0, 0, 1), distanceToMove, collisions);
+        leftCast = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(-1, 0, 0), distanceToMove, collisions);
+        rightCast = Physics.Raycast(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(1, 0, 0), distanceToMove, collisions);
 
-        Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, -1) * distanceToMove, Color.red);
-        Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(0, 0, 1) * distanceToMove, Color.green);
-        Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(1, 0, 0) * distanceToMove, Color.blue);
-        Debug.DrawRay(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(-1, 0, 0) * distanceToMove, Color.yellow);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(0, 0, -1) * distanceToMove, Color.red);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(0, 0, 1) * distanceToMove, Color.green);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(1, 0, 0) * distanceToMove, Color.blue);
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y, transform.position.z), new Vector3(-1, 0, 0) * distanceToMove, Color.yellow);
 
 
         directionInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         if (directionInput != Vector3.zero && !moving) {
             if (directionInput.z == -1) {
-                if (!downCast) { endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - distanceToMove); }
+                if (!downCast) { 
+                endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z - distanceToMove); }
                 direction = "down";
                 facing = new Vector3(0, 0, -1);
             } else if (directionInput.x == -1) {
-                if (!leftCast) { endPosition = new Vector3(transform.position.x - distanceToMove, transform.position.y, transform.position.z); }
+                if (!leftCast) { 
+                endPosition = new Vector3(transform.position.x - distanceToMove, transform.position.y, transform.position.z); }
                 direction = "left";
                 facing = new Vector3(-1, 0, 0);
             } else if (directionInput.x == 1) {
-                if (!rightCast) { endPosition = new Vector3(transform.position.x + distanceToMove, transform.position.y, transform.position.z); }
+                if (!rightCast) { 
+                endPosition = new Vector3(transform.position.x + distanceToMove, transform.position.y, transform.position.z); }
                 direction = "right";
                 facing = new Vector3(1, 0, 0);
             } else if (directionInput.z == 1) {
-                if (!upCast) { endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + distanceToMove); }
+                if (!upCast) { 
+                endPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z + distanceToMove); }
                 direction = "up";
                 facing = new Vector3(0, 0, 1);
             }
-           	moveToPoint = true;
+           	
+            // Perform the raycast to check for a pushable object
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, directionInput, out hit, 0.7f)) {
+                if (hit.collider.CompareTag("Pushable")) {
+                    // Interact with the pushable object
+                    hit.collider.gameObject.GetComponent<Rock>().Push(direction);
+                    Debug.Log("Rock found.");
+                } else {
+                    Debug.Log("Space blocked by non-pushable object.");
+                }
+            } else {
+                moveToPoint = true;
+            }
+
         }
     }
 
@@ -161,6 +179,9 @@ public class TileMovementController : MonoBehaviour {
                 0,
                 Mathf.Floor(newPosition.z) + 0.5f
             );
+
+            // Adjust new position to retain sprite's Y value. 
+            newPosition = new Vector3(newPosition.x, transform.position.y, newPosition.z);
             transform.position = newPosition;
             endPosition = newPosition;
         }
