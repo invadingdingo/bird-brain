@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 2a9269f282ddc214e9be1a386a8ce43f, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 2beabe0e0a483094883f5da9322d829a, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -264,7 +264,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8651187045132156245}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.5, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -349,9 +349,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d596f9b901cc2f54daa1bc4b2cc1f9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 7.5
-  runningSpeed: 11.5
-  jumpSpeed: 8
+  walkingSpeed: 5
+  runningSpeed: 5
+  jumpSpeed: 6.5
   gravity: 20
   playerCamera: {fileID: 8651187044917142349}
   lookSpeed: 2

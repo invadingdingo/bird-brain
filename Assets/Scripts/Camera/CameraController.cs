@@ -59,8 +59,7 @@ public class CameraController : MonoBehaviour
     void SwitchHolders()
     {
         if (overhead)
-        {   
-            //storedRotation = transform.localRotation;
+        {
             transform.SetParent(overheadCameraHolder,false);
             camera.orthographic = true;
             transform.localRotation = Quaternion.identity;

@@ -113,14 +113,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d596f9b901cc2f54daa1bc4b2cc1f9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 7.5
-  runningSpeed: 11.5
+  walkingSpeed: 5
+  runningSpeed: 5
   jumpSpeed: 8
   gravity: 20
   playerCamera: {fileID: 3061567235211455133}
   lookSpeed: 2
   lookXLimit: 45
   canMove: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!143 &3061567234996417666
 CharacterController:
   m_ObjectHideFlags: 0
@@ -240,6 +243,8 @@ MonoBehaviour:
   overheadCameraHolder: {fileID: 0}
   cm: {fileID: 0}
   overhead: 0
+  outlineShader: {fileID: 0}
+  outlineVolume: {fileID: 0}
 --- !u!1 &3061567235346040906
 GameObject:
   m_ObjectHideFlags: 0

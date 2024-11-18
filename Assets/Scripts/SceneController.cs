@@ -20,6 +20,14 @@ public class SceneController : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
+
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
