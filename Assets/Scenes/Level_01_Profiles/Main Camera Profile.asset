@@ -34,7 +34,7 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   depthThreshold:
-    overrideState: 0
+    overrideState: 1
     value: 0.2
   normalThreshold:
     overrideState: 0
@@ -46,5 +46,5 @@ MonoBehaviour:
     overrideState: 0
     value: 7
   color:
-    overrideState: 0
-    value: {r: 1, g: 1, b: 1, a: 1}
+    overrideState: 1
+    value: {r: 0.38679248, g: 0.38679248, b: 0.38679248, a: 1}
