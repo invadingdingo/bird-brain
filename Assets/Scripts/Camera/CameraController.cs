@@ -16,6 +16,10 @@ public class CameraController : MonoBehaviour
     public PostProcessLayer outlineShader;
     public PostProcessVolume outlineVolume;
 
+    private bool canTab = true;
+    
+    
+
     void Awake()
     {
         camera = GetComponent<Camera>();
@@ -30,6 +34,11 @@ public class CameraController : MonoBehaviour
         StartCoroutine("DumbProcessing");
     }
 
+    public void SetCanTab(bool canWe)
+    {
+        canTab = canWe;
+    }
+
     private IEnumerator DumbProcessing()
     {
         yield return new WaitForFixedUpdate();
@@ -40,7 +49,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab) && canTab)
         {
             overhead = !overhead;
             SwitchHolders();
