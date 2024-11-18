@@ -111,10 +111,10 @@ public class TileMovementController : MonoBehaviour {
            	
             // Perform the raycast to check for a pushable object
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, directionInput, out hit, 1f)) {
+            if (Physics.Raycast(transform.position, directionInput, out hit, 0.7f)) {
                 if (hit.collider.CompareTag("Pushable")) {
                     // Interact with the pushable object
-                    //InteractWithPushable(hit.collider.gameObject, rayDirection);
+                    hit.collider.gameObject.GetComponent<Rock>().Push(direction);
                     Debug.Log("Rock found.");
                 } else {
                     Debug.Log("Space blocked by non-pushable object.");
