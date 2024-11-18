@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 6753808760497901898}
   - component: {fileID: 6753808760497901899}
   m_Layer: 0
-  m_Name: Lever
+  m_Name: FP_Lever
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
