@@ -39,6 +39,8 @@ public class TileMovementController : MonoBehaviour {
     private bool canMove;
     private GameObject interactable;
 
+    
+
     void Start() {
         sr = GetComponent<SpriteRenderer>();
         endPosition = transform.position;
@@ -124,6 +126,8 @@ public class TileMovementController : MonoBehaviour {
 
         }
     }
+
+    
 
     public void AnimationControl() {
         Sprite[] currentSet = downWalk;
