@@ -11883,7 +11883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 2a9269f282ddc214e9be1a386a8ce43f, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 2beabe0e0a483094883f5da9322d829a, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -22739,6 +22739,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5004042168988560744, guid: 9f5c56bd6380d83438e1fc71fe808535, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d193df2d1c086dc4da0fc0fcda17c2c5, type: 2}
+    - target: {fileID: 5004042168988560744, guid: 9f5c56bd6380d83438e1fc71fe808535, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: dac08218d4ed23640a1ee6935aa4128e, type: 2}
     - target: {fileID: 5958394758757253752, guid: 9f5c56bd6380d83438e1fc71fe808535, type: 3}
       propertyPath: m_Name
       value: Rock
@@ -22787,6 +22795,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7103613257343277474, guid: 9f5c56bd6380d83438e1fc71fe808535, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4013275331872712965, guid: 7fd001c2588e86e41868804a31c1a664, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5c56bd6380d83438e1fc71fe808535, type: 3}
 --- !u!1001 &6504416972446210014
