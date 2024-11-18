@@ -34,7 +34,6 @@ MonoBehaviour:
   color:
     overrideState: 1
     value: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 1}
---- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

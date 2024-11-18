@@ -105,7 +105,7 @@ public class FPMovementController : MonoBehaviour {
             GetComponent<CapsuleCollider>().enabled = false;
 
             // Raycast to find the height of the ground being transitioned to.
-            // Shoot ray down from 100 units up to check for intersection.
+            // Shoot ray down from 30 units up to check for intersection.
             Ray ray = new Ray(new Vector3(newPosition.x, 30f, newPosition.z), Vector3.down);
             if (Physics.Raycast(ray, out RaycastHit hit, 40f, groundLayer)) {
                 // If intersection found, set newPosition.y to the point of intersection plus 1 to account for player height..
