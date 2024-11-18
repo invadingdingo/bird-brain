@@ -27,8 +27,7 @@ public class CameraController : MonoBehaviour
     }
 
     void Start()
-    {
-        
+    { 
         overhead = !overhead;
         SwitchHolders();
         StartCoroutine("DumbProcessing");
@@ -70,6 +69,9 @@ public class CameraController : MonoBehaviour
             outlineShader.enabled = false;
             outlineVolume.enabled = false;
 
+            // Change music
+            AudioManager.instance.SwitchMusic("top");
+
             // Tells control manager to switch to top down controls. 
             cm.SetTileAsActive();
             
@@ -85,6 +87,9 @@ public class CameraController : MonoBehaviour
             //Turn on outline shader
             outlineShader.enabled = true;
             outlineVolume.enabled = true;
+
+            // Change music
+            AudioManager.instance.SwitchMusic("first");
             
             // Tells control manager to switch to first person controls. 
             cm.SetFPAsActive();

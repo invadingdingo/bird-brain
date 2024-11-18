@@ -19,6 +19,10 @@ public class TouchInteract : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+
+            // Play lever SFX.
+            AudioManager.instance.PlayLever();
+
             if (otherPerspective != null)
                 otherPerspective.OtherPerspectiveTrigger();
             if (myAnimator != null)
