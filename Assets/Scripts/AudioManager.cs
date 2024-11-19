@@ -70,7 +70,7 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayFootStep() {
         if (!asFootStep.isPlaying) {
-            asFootStep.pitch = 0.45f + Random.Range(-0.05f, 0.05f);
+            asFootStep.pitch = 0.8f + Random.Range(-0.05f, 0.05f);
             asFootStep.Play();
         }
     }
