@@ -12,9 +12,9 @@ public class NoTabZone : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Enter no tab");
         if (other.CompareTag("Player"))
         {
-
             camController.SetCanTab(false);
         }
     }
@@ -23,7 +23,6 @@ public class NoTabZone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
             camController.SetCanTab(true);
         }
     }
