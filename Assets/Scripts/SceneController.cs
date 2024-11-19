@@ -8,6 +8,10 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
 
+    public float finalScreenWait = 2f;
+
+    public Animator canvasAnimator;
+
     private void Awake()
     {
         if (Instance == null)
@@ -33,6 +37,9 @@ public class SceneController : MonoBehaviour
     {
         if (sceneName == "Menu") {
             AudioManager.instance.StopMusic();
+            canvasAnimator.SetTrigger("Trigger");
+            StartCoroutine(WaitAndLoad(sceneName));
+
         } else {
             AudioManager.instance.PlayMusic();
             
@@ -46,15 +53,18 @@ public class SceneController : MonoBehaviour
             }
             Debug.Log("New Furthest Level: "+PlayerPrefs.GetInt("FurthestLevel"));
             
-            
+            SceneManager.LoadScene(sceneName);
             
         }
         
-        
+    }
 
+    private IEnumerator WaitAndLoad(string sceneName)
+    {
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(finalScreenWait);
+        Time.timeScale = 1f;
         SceneManager.LoadScene(sceneName);
-
-        
     }
 
     public string CurrentSceneName()
