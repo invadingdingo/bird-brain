@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,9 +35,26 @@ public class SceneController : MonoBehaviour
             AudioManager.instance.StopMusic();
         } else {
             AudioManager.instance.PlayMusic();
+            
+            var str2 = sceneName.Substring(sceneName.Length - 2);
+            int sceneNumber = int.Parse(str2);
+            int furthest = PlayerPrefs.GetInt("FurthestLevel");
+            Debug.Log("Old Furthest Level: " + furthest);
+            if (furthest < sceneNumber)
+            {
+                PlayerPrefs.SetInt("FurthestLevel", sceneNumber);
+            }
+            Debug.Log("New Furthest Level: "+PlayerPrefs.GetInt("FurthestLevel"));
+            
+            
+            
         }
+        
+        
 
         SceneManager.LoadScene(sceneName);
+
+        
     }
 
     public string CurrentSceneName()
