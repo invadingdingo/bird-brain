@@ -41,8 +41,9 @@ public class AudioManager : MonoBehaviour {
         { 
             Destroy(this); 
         } 
-        else 
-        { 
+        else
+        {
+            DontDestroyOnLoad(this);
             instance = this; 
         } 
     }
