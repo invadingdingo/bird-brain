@@ -52,12 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SFXVolume: 1
   BGMVolume: 1
-  asSFX: {fileID: 7824954326238282662}
-  asFootStep: {fileID: 7824954326238282663}
-  asFirstPersonBGM: {fileID: 7824954326238282660}
-  asTopDownBGM: {fileID: 7824954326238282661}
-  asFirstPersonBGN: {fileID: 7824954326238282658}
-  asTopDownBGN: {fileID: 7824954326238282659}
+  fadeDuration: 0.3
+  currentPerspective: top
   footstep: {fileID: 8300000, guid: 31bc933fdfede314baec135514271837, type: 3}
   rock: {fileID: 8300000, guid: bc46385c973261e4e995e536da67dbff, type: 3}
   lever: {fileID: 8300000, guid: dd09f503e97ce914ba613fcbb3209ec7, type: 3}
@@ -66,7 +62,12 @@ MonoBehaviour:
   topDownBGM: {fileID: 8300000, guid: 907ca62ea940bff4f8c4154d86dcc23d, type: 3}
   firstPersonBGN: {fileID: 8300000, guid: a2c8cd2d3ffef7341a687b4e79d16cf4, type: 3}
   topDownBGN: {fileID: 8300000, guid: afa9c9fe085ec2146bbcd5adce9947f1, type: 3}
-  fadeDuration: 0.3
+  asSFX: {fileID: 7824954326238282662}
+  asFootStep: {fileID: 7824954326238282663}
+  asFirstPersonBGM: {fileID: 7824954326238282660}
+  asTopDownBGM: {fileID: 7824954326238282661}
+  asFirstPersonBGN: {fileID: 7824954326238282658}
+  asTopDownBGN: {fileID: 7824954326238282659}
 --- !u!82 &7824954326238282662
 AudioSource:
   m_ObjectHideFlags: 0
@@ -76,7 +77,7 @@ AudioSource:
   m_GameObject: {fileID: 7824954326238282666}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1875782445436400423, guid: cdd667d99d3533e44badfcb4e2a4daa4, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.413
@@ -172,7 +173,7 @@ AudioSource:
   m_GameObject: {fileID: 7824954326238282666}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1875782445436400423, guid: cdd667d99d3533e44badfcb4e2a4daa4, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.45

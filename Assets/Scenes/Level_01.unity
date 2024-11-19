@@ -9902,9 +9902,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d596f9b901cc2f54daa1bc4b2cc1f9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkingSpeed: 7.5
-  runningSpeed: 11.5
-  jumpSpeed: 8
+  walkingSpeed: 5
+  runningSpeed: 5
+  jumpSpeed: 6
   gravity: 20
   playerCamera: {fileID: 963194227}
   lookSpeed: 2
@@ -10256,6 +10256,14 @@ PrefabInstance:
       propertyPath: m_Volume
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7824954326238282662, guid: ac5fc411f91fb094f9259fd6a461f917, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 1875782445436400423, guid: cdd667d99d3533e44badfcb4e2a4daa4, type: 2}
+    - target: {fileID: 7824954326238282663, guid: ac5fc411f91fb094f9259fd6a461f917, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 1875782445436400423, guid: cdd667d99d3533e44badfcb4e2a4daa4, type: 2}
     - target: {fileID: 7824954326238282664, guid: ac5fc411f91fb094f9259fd6a461f917, type: 3}
       propertyPath: m_RootOrder
       value: 9
