@@ -59,7 +59,7 @@ MonoBehaviour:
   lever: {fileID: 8300000, guid: dd09f503e97ce914ba613fcbb3209ec7, type: 3}
   button: {fileID: 8300000, guid: 81e91cc3633996944905b7231ae565c5, type: 3}
   firstPersonBGM: {fileID: 8300000, guid: 39591946b3ec5c047a5888582026e737, type: 3}
-  topDownBGM: {fileID: 8300000, guid: 907ca62ea940bff4f8c4154d86dcc23d, type: 3}
+  topDownBGM: {fileID: 8300000, guid: 2aa7aea3e42900249b46767ca796153c, type: 3}
   firstPersonBGN: {fileID: 8300000, guid: a2c8cd2d3ffef7341a687b4e79d16cf4, type: 3}
   topDownBGN: {fileID: 8300000, guid: afa9c9fe085ec2146bbcd5adce9947f1, type: 3}
   asSFX: {fileID: 7824954326238282662}
@@ -271,7 +271,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4796338703193858096, guid: cdd667d99d3533e44badfcb4e2a4daa4, type: 2}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0
   m_Pitch: 1
   Loop: 1
@@ -466,7 +466,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -562,7 +562,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

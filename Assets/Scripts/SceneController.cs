@@ -37,12 +37,11 @@ public class SceneController : MonoBehaviour
     {
         if (sceneName == "Menu") {
             AudioManager.instance.StopMusic();
-            canvasAnimator.SetTrigger("Trigger");
-            StartCoroutine(WaitAndLoad(sceneName));
+            SceneManager.LoadScene(sceneName);
 
         } else {
             AudioManager.instance.PlayMusic();
-            
+
             var str2 = sceneName.Substring(sceneName.Length - 2);
             int sceneNumber = int.Parse(str2);
             int furthest = PlayerPrefs.GetInt("FurthestLevel");
@@ -52,12 +51,12 @@ public class SceneController : MonoBehaviour
                 PlayerPrefs.SetInt("FurthestLevel", sceneNumber);
             }
             Debug.Log("New Furthest Level: "+PlayerPrefs.GetInt("FurthestLevel"));
-            
+
             SceneManager.LoadScene(sceneName);
-            
+
         }
-        
-    }
+
+    } 
 
     private IEnumerator WaitAndLoad(string sceneName)
     {
